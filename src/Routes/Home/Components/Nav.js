@@ -1,14 +1,32 @@
 import React from "react";
+import { useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "./Nav.css";
 
 const Nav = () => {
   const navigate = useNavigate();
+  const matches = useMediaQuery("(min-width:600px)");
+
   return (
     <nav className="navbar">
       <ul className="navbarItemsLeft">
         <li>
-          <button className="myBtn" style={{width: '100px'}} onClick={() => navigate("add")}>New Task</button>
+          {!matches && (
+            <button
+              className="button"
+              style={{ width: "100px" }}
+              onClick={() => navigate("/analytics")}
+            >
+              Analytics
+            </button>
+          )}
+          <button
+            className="button"
+            style={{ width: "100px" }}
+            onClick={() => navigate("add")}
+          >
+            New Task
+          </button>
         </li>
       </ul>
     </nav>
@@ -16,4 +34,3 @@ const Nav = () => {
 };
 
 export default Nav;
-

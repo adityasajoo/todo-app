@@ -10,3 +10,10 @@
     justify-content: space-evenly;
 
 }
+
+.btns{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:0;
+}
+

@@ -1,6 +1,7 @@
 .todoList {
   max-height: 85vh;
   min-height: 100px;
+  min-width: 300px;
   width: 350px;
   margin: 5px;
   margin-top: 20px;
@@ -10,8 +11,6 @@
   padding: 0;
   overflow: hidden;
   margin-bottom: auto;
-
-
 }
 
 .todoListBody {
@@ -21,9 +20,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
-
 
 .listHeader {
   text-align: center;
@@ -55,4 +53,10 @@
 .done-branch {
   background-color: #2f80ed;
   color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+  .todoList {
+    width: 300px;
+  }
 }

@@ -1,34 +1,31 @@
 import React, { useState } from "react";
 import Todo from "./Todo";
 import "./TodoList.css";
+import { useStateValue } from "../../../Contexts/UserProvider";
+import { actionTypes } from "../../../Contexts/UserReducer";
+
 
 const branchClassNames = {
-  todo : "todo-branch",
-  progress : "progress-branch",
-  done : "done-branch",
-}
+  todo: "todo-branch",
+  progress: "progress-branch",
+  done: "done-branch",
+};
 const branchHeader = {
-  todo : "To-Do",
-  progress : "In-Progress",
-  done : "Done",
-}
+  todo: "To-Do",
+  progress: "In-Progress",
+  done: "Done",
+};
 
-const TodoList = ({ branch }) => {
-  const [todoList, setTodoList] = useState([
-    { id: 1, name: "Walk", description: "Go for a walk", branch: "todo" },
-    { id: 2, name: "Dance", description: "Dance in the Hall", branch: "todo" },
-    { id: 3, name: "Sleep", description: " ", branch: "todo" },
-    { id: 3, name: "Sleep", description: " ", branch: "progress" },
-  ]);
-
-  const changeBranch = (id,newBranch) => {
-    const todo = todoList.filter((todo,i)=> todo.id===id);
-    todo[0].branch = newBranch;
-    setTodoList(todoList.filter((todo,i)=> todo.id!==id).concat(todo[0]));
-  }
+const TodoList = ({ branch,onDragOver,onDrop,onDragStart }) => {
+  const [{ todoList }, dispatch] = useStateValue();
 
   return (
-    <div className="todoList" id="todoList">
+    <div
+      className="todoList"
+      id="todoList"
+      onDragOver={(e) => onDragOver(e)}
+      onDrop={(e) => onDrop(e, branch)}
+    >
       <div className={`listHeader ${branchClassNames[branch]}`}>
         <p>{branchHeader[branch]}</p>
       </div>
@@ -36,7 +33,7 @@ const TodoList = ({ branch }) => {
         {todoList
           .filter((todo, i) => todo.branch === branch)
           .map((todo, i) => (
-            <Todo key={i} todo={todo} />
+            <Todo key={i} todo={todo} onDragStart={onDragStart} />
           ))}
       </div>
     </div>
