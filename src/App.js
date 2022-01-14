@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Login from "./Routes/Login/Login";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Home from "./Routes/Home/Home";
+import Dashboard from "./Routes/Home/Components/Dashboard";
+import AddTodo from "./Routes/Home/Components/AddTodo";
+import { useStateValue } from "./Contexts/UserProvider";
+import Analytics from "./Routes/Home/Components/Analytics";
 
 function App() {
+  const [{ user }] = useStateValue();
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      {!user ? (
+        <Route path="/login" element={<Login />} />
+      ) : (
+        <Route path="/" element={<Home />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/add" element={<AddTodo />} />
+          <Route path="/analytics" element={<Analytics />} />
+        </Route>
+      )}
+      <Route path="*" element={<Navigate to={user ? "/" : "/login"} />} />
+    </Routes>
   );
 }
 

@@ -1,0 +1,12 @@
+.navbar{
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #F2F2F2;
+}
+
+
+.navbarItemsLeft{
+    list-style: none;
+    margin-right: 20px;
+}

@@ -1,0 +1,14 @@
+.card-name {
+  margin: 10px 0 0 0;
+  padding: 0;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.card-description {
+  margin: 10px 0 0 0 ;
+  padding: 0;
+  font-weight: 400;
+  font-size:14px;
+  color: #80878F;
+}
