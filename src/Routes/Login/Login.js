@@ -9,9 +9,10 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useStateValue } from "../../Contexts/StateProvider";
 import { actionTypes } from "../../Contexts/StateReducer";
 import axios from "axios";
-import { setLocalStorage } from "../../utils/helper";
+import { setLocalStorage } from "../../utils/LocalStorageHelper";
 
 const Login = () => {
+  // eslint-disable-next-line no-empty-pattern
   const [ {}, dispatch] = useStateValue();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);

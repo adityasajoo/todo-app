@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "./Nav";
 import TaskList from "./TaskList";
-import {BRANCHES} from '../../../utils/items'
+import {BRANCHES} from '../../../utils/Constants'
 
 
 const Dashboard = () => {

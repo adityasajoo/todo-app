@@ -2,47 +2,47 @@ import React from "react";
 import Task from "./Task";
 import { useStateValue } from "../../../Contexts/StateProvider";
 import { actionTypes } from "../../../Contexts/StateReducer";
-import { branchClassNames, branchHeader } from "../../../utils/items";
+import { branchClassNames, branchHeader } from "../../../utils/Constants";
+import {setTasksLocalStorage} from '../../../utils/LocalStorageHelper'
 
 const TaskList = ({ branch }) => {
   const [{ taskList }, dispatch] = useStateValue();
 
   //Change branch of a task
   const changeBranch = (id, newBranch) => {
-    const currentTodo = taskList.filter((todo) => {
-      if (todo.id === id) todo.branch = newBranch;
-      return todo;
-    });
-    dispatch({
-      type: actionTypes.SET_TASK,
-      taskList: currentTodo,
-    });
-  };
-
-  const onDragStart = (e, id) => {
-    e.dataTransfer.setData("id", id);
-  };
-
-  const onDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const onDrop = (e, b) => {
-    const id = e.dataTransfer.getData("id");
-    console.log(b);
-    const currentTask = taskList.filter((task) => {
-      if (task.id === id) task.branch = b;
+    const currentTask= taskList.filter((task) => {
+      if (task.id === id) task.branch = newBranch;
       return task;
     });
     dispatch({
       type: actionTypes.SET_TASK,
       taskList: currentTask,
     });
+    setTasksLocalStorage(currentTask)
   };
 
+  /**Handle drag event
+  Store the id of the dragged task to event**/
+  const onDragStart = (e, id) => {
+    e.dataTransfer.setData("id", id);
+  };
+
+  //Handle drag over event
+  const onDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  //Get the id of the dragged task and change its branch
+  const onDrop = (e, newBranch) => {
+    const id = e.dataTransfer.getData("id");
+    changeBranch(id,newBranch)
+  };
+
+  //Delete the selected task
   const deleteTodo = (id) => {
-    const newList = taskList.filter((task) => task.id !== id);
-    dispatch({ type: actionTypes.SET_TASK,taskList:newList });
+    const newTasks= taskList.filter((task) => task.id !== id);
+    dispatch({ type: actionTypes.SET_TASK, taskList: newTasks });
+    setTasksLocalStorage(newTasks);
   };
 
   return (
@@ -64,7 +64,7 @@ const TaskList = ({ branch }) => {
               task={task}
               onDragStart={onDragStart}
               changeBranch={changeBranch}
-              deleteTodo = {deleteTodo}
+              deleteTodo={deleteTodo}
             />
           ))}
       </div>

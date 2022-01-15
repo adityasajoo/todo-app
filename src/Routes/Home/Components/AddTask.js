@@ -5,6 +5,7 @@ import { useStateValue } from "../../../Contexts/StateProvider";
 import { v4 as uuid } from "uuid";
 import { actionTypes } from "../../../Contexts/StateReducer";
 import { useNavigate } from "react-router-dom";
+import { setTasksLocalStorage } from "../../../utils/LocalStorageHelper";
 
 const AddTask = () => {
   const navigate = useNavigate();
@@ -22,10 +23,10 @@ const AddTask = () => {
 
   //Handle branch button change event
   const handleBranchChange = (selected) => {
-    const b = { todo: false, progress: false, done: false };
-    b[selected] = true;
-    setBranch(b);
-    setCurrentBranch(selected);
+    const branches = { todo: false, progress: false, done: false };
+    branches[selected] = true;
+    setBranch(branches); //Update button group
+    setCurrentBranch(selected); //Set current branch to make saving easy
   };
 
   //Create New Task
@@ -41,8 +42,11 @@ const AddTask = () => {
     };
 
     dispatch({ type: actionTypes.SET_TASK, taskList: [...taskList, task] });
+    setTasksLocalStorage([...taskList, task]);
     setTaskName("");
     setDescription("");
+    setCurrentBranch("todo");
+    setBranch({ todo: true, progress: false, done: false });
     navigate("/");
   };
 
@@ -104,7 +108,9 @@ const AddTask = () => {
           </div>
         </div>
         <div className="btns">
-          <button className="cancel-btn" onClick={() => navigate('/')}>Cancel</button>
+          <button className="cancel-btn" onClick={() => navigate("/")}>
+            Cancel
+          </button>
           <button className="create-btn" onClick={handleCreate}>
             Create
           </button>

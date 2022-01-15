@@ -1,8 +1,8 @@
-import { getLocalStorage } from "../utils/helper";
+import { getLocalStorage,getTasksLocalStorage } from "../utils/LocalStorageHelper";
 
 export const initialState = {
   user: getLocalStorage(),
-  taskList: [{id:"asd","name":"Play",description:"",branch:"todo"}],
+  taskList: getTasksLocalStorage(),
 };
 
 export const actionTypes = {

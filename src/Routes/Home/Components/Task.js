@@ -2,13 +2,17 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useMediaQuery } from "@mui/material";
-import { len, BRANCHES } from "../../../utils/items";
+import { len, BRANCHES } from "../../../utils/Constants";
 import React from "react";
 
 
 const Task = ({ task, onDragStart, changeBranch, deleteTodo }) => {
   const matches = useMediaQuery("(min-width:800px)");
 
+  /**Handle branch change buttons
+   * Next and prev are calculated based on the tasks branch  
+   * This buttons are visible onlt in small screens
+   */
   const i = BRANCHES.indexOf(task.branch);
   const prev = BRANCHES[(i + len - 1) % len];
   const next = BRANCHES[(i + 1) % len];

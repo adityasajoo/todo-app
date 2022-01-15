@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import SecondaryNav from "./SecondaryNav";
 import { PieChart } from "react-minimal-pie-chart";
 import { useStateValue } from "../../../Contexts/StateProvider";
+import {BRANCHES} from '../../../utils/Constants'
 
 
 const Analytics = () => {
   const [{ taskList }] = useStateValue();
   const [values, setValues] = useState({ todo: 0, progress: 0, done: 0 });
+
+  //Control Explode of the PI Chart 
   const shiftSize =3;
+
+  //Update pichart when tasklist changes
   useEffect(() => {
     const tempValues = { todo: 0, progress: 0, done: 0 };
     taskList.forEach((todo) => {
@@ -30,13 +35,13 @@ const Analytics = () => {
           radius={PieChart.defaultProps.radius - shiftSize}
           segmentsShift={(index) => (index === 0 ? shiftSize : 0.5)}
           data={[
-            { title: "To-Do", value: values["todo"], color: "#27AE60" },
+            { title: "To-Do", value: values[BRANCHES[0]], color: "#27AE60" },
             {
               title: "In Progress",
-              value: values["progress"],
+              value: values[BRANCHES[1]],
               color: "#F2C94C",
             },
-            { title: "Done", value: values["done"], color: "#2F80ED" },
+            { title: "Done", value: values[BRANCHES[2]], color: "#2F80ED" },
           ]}
         />
 
