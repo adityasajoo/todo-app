@@ -1,31 +1,26 @@
 import React from "react";
-import Todo from "./Todo";
-import "./TodoList.css";
-import { useStateValue } from "../../../Contexts/UserProvider";
-import { actionTypes } from "../../../Contexts/UserReducer";
+import Task from "./Task";
+import { useStateValue } from "../../../Contexts/StateProvider";
+import { actionTypes } from "../../../Contexts/StateReducer";
 import { branchClassNames, branchHeader } from "../../../utils/items";
 
-const TodoList = ({ branch }) => {
-  const [{ todoList }, dispatch] = useStateValue();
+const TaskList = ({ branch }) => {
+  const [{ taskList }, dispatch] = useStateValue();
 
+  //Change branch of a task
   const changeBranch = (id, newBranch) => {
-    const currentTodo = todoList.filter((todo) => {
+    const currentTodo = taskList.filter((todo) => {
       if (todo.id === id) todo.branch = newBranch;
       return todo;
     });
     dispatch({
-      type: actionTypes.SET_TODO,
-      todoList: currentTodo,
+      type: actionTypes.SET_TASK,
+      taskList: currentTodo,
     });
-    console.log(currentTodo);
   };
 
   const onDragStart = (e, id) => {
     e.dataTransfer.setData("id", id);
-  };
-
-  const onTouchStart = (e, id) => {
-    console.log("Touched");
   };
 
   const onDragOver = (e) => {
@@ -35,20 +30,19 @@ const TodoList = ({ branch }) => {
   const onDrop = (e, b) => {
     const id = e.dataTransfer.getData("id");
     console.log(b);
-    const currentTodo = todoList.filter((todo) => {
-      console.log("id", id, "todo : ", todo.id);
-      if (todo.id == id) todo.branch = b;
-      return todo;
+    const currentTask = taskList.filter((task) => {
+      if (task.id === id) task.branch = b;
+      return task;
     });
     dispatch({
-      type: actionTypes.SET_TODO,
-      todoList: currentTodo,
+      type: actionTypes.SET_TASK,
+      taskList: currentTask,
     });
   };
 
   const deleteTodo = (id) => {
-    const newList = todoList.filter((todo) => todo.id !== id);
-    dispatch({ type: actionTypes.SET_TODO,todoList:newList });
+    const newList = taskList.filter((task) => task.id !== id);
+    dispatch({ type: actionTypes.SET_TASK,taskList:newList });
   };
 
   return (
@@ -62,12 +56,12 @@ const TodoList = ({ branch }) => {
         <p>{branchHeader[branch]}</p>
       </div>
       <div className="todoListBody">
-        {todoList
-          .filter((todo, i) => todo.branch === branch)
-          .map((todo, i) => (
-            <Todo
+        {taskList
+          .filter((task, i) => task.branch === branch)
+          .map((task, i) => (
+            <Task
               key={i}
-              todo={todo}
+              task={task}
               onDragStart={onDragStart}
               changeBranch={changeBranch}
               deleteTodo = {deleteTodo}
@@ -78,8 +72,8 @@ const TodoList = ({ branch }) => {
   );
 };
 
-export default TodoList;
+export default TaskList;
 
-TodoList.defaultProps = {
+TaskList.defaultProps = {
   branch: "todo",
 };

@@ -1,16 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import SideNav from "./Components/SideNav";
-import Nav from "./Components/Nav";
-import { actionTypes } from "../../Contexts/UserReducer";
-import { useStateValue } from "../../Contexts/UserProvider";
 import "./Home.css";
 
-const Home = ({ setToken, token }) => {
-  const [{ user }, dispatch] = useStateValue();
-
-  console.log("In Home :", user);
-
+const Home = () => {
   return (
     <div className="home">
       <SideNav />

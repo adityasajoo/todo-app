@@ -2,8 +2,6 @@ import React from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
 
-import './SecondaryNav.css'
-
 
 const SecondaryNav = ({title}) => {
 const navigate = useNavigate();

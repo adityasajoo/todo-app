@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import Alert from "@mui/material/Alert";
 import SecondaryNav from "./SecondaryNav";
-import { useStateValue } from "../../../Contexts/UserProvider";
+import { useStateValue } from "../../../Contexts/StateProvider";
 import { v4 as uuid } from "uuid";
-
-import "./AddTodo.css";
-import { actionTypes } from "../../../Contexts/UserReducer";
+import { actionTypes } from "../../../Contexts/StateReducer";
 import { useNavigate } from "react-router-dom";
 
-const AddTodo = () => {
+const AddTask = () => {
   const navigate = useNavigate();
   const [branch, setBranch] = useState({
     todo: true,
@@ -20,8 +18,9 @@ const AddTodo = () => {
   const [currentBranch, setCurrentBranch] = useState("todo");
   const [error, setError] = useState(null);
 
-  const [{ todoList }, dispatch] = useStateValue();
+  const [{ taskList }, dispatch] = useStateValue();
 
+  //Handle branch button change event
   const handleBranchChange = (selected) => {
     const b = { todo: false, progress: false, done: false };
     b[selected] = true;
@@ -29,18 +28,19 @@ const AddTodo = () => {
     setCurrentBranch(selected);
   };
 
+  //Create New Task
   const handleCreate = () => {
     if (!taskName) {
       return setError("Task Name is required");
     }
-    const todo = {
+    const task = {
       id: uuid(),
       name: taskName,
       description: description,
       branch: currentBranch,
     };
-    console.log("TODO : ",todo)
-    dispatch({ type: actionTypes.SET_TODO, todoList: [...todoList, todo] });
+
+    dispatch({ type: actionTypes.SET_TASK, taskList: [...taskList, task] });
     setTaskName("");
     setDescription("");
     navigate("/");
@@ -114,4 +114,4 @@ const AddTodo = () => {
   );
 };
 
-export default AddTodo;
+export default AddTask;

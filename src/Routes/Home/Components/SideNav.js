@@ -1,23 +1,13 @@
 import React from "react";
-import "./SideNav.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import PieChartIcon from "@mui/icons-material/PieChart";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Menu,
-  MenuItem,
-} from "@mui/material";
-import { useStateValue } from "../../../Contexts/UserProvider";
-import { actionTypes } from "../../../Contexts/UserReducer";
+import { Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
+import { useStateValue } from "../../../Contexts/StateProvider";
+import { actionTypes } from "../../../Contexts/StateReducer";
 import { removeLocalStorage } from "../../../utils/helper";
 
 const SideNav = () => {
-  const [{},dispatch] = useStateValue();
+  const [{}, dispatch] = useStateValue();
 
   const navigate = useNavigate();
   const location = useLocation();

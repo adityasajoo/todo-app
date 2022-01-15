@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import SecondaryNav from "./SecondaryNav";
 import { PieChart } from "react-minimal-pie-chart";
-import { useStateValue } from "../../../Contexts/UserProvider";
-import "./Analytics.css";
+import { useStateValue } from "../../../Contexts/StateProvider";
+
 
 const Analytics = () => {
-  const [{ todoList }] = useStateValue();
+  const [{ taskList }] = useStateValue();
   const [values, setValues] = useState({ todo: 0, progress: 0, done: 0 });
   const shiftSize =3;
   useEffect(() => {
     const tempValues = { todo: 0, progress: 0, done: 0 };
-    todoList.forEach((todo) => {
+    taskList.forEach((todo) => {
       tempValues[todo.branch] += 1;
     });
     setValues(tempValues);
-  }, [todoList]);
+  }, [taskList]);
 
   return (
     <div>

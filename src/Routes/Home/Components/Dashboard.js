@@ -1,7 +1,6 @@
 import React from "react";
 import Nav from "./Nav";
-import TodoList from "./TodoList";
-import "./Dashboard.css";
+import TaskList from "./TaskList";
 import {BRANCHES} from '../../../utils/items'
 
 
@@ -11,7 +10,7 @@ const Dashboard = () => {
       <Nav />
       <div className="dashboard">
         {BRANCHES.map((branch) => (
-          <TodoList
+          <TaskList
             branch={branch}
             key={branch}
           />

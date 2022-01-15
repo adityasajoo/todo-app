@@ -1,7 +1,7 @@
 import React from "react";
 import { useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import "./Nav.css";
+
 
 const Nav = () => {
   const navigate = useNavigate();

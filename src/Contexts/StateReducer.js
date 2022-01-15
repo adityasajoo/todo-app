@@ -2,18 +2,13 @@ import { getLocalStorage } from "../utils/helper";
 
 export const initialState = {
   user: getLocalStorage(),
-  todoList: [
-    { id: 1, name: "Walk", description: "Go for a walk", branch: "todo" },
-    { id: 2, name: "Dance", description: "Dance in the Hall", branch: "todo" },
-    { id: 3, name: "Sleep", description: "", branch: "todo" },
-    { id: 4, name: "Sleep", description: "", branch: "progress" },
-  ],
+  taskList: [{id:"asd","name":"Play",description:"",branch:"todo"}],
 };
 
 export const actionTypes = {
   SET_USER: "SET_USER",
   REMOVE_USER: "REMOVE_USER",
-  SET_TODO : "SET_TODO",
+  SET_TASK: "SET_TASK",
 };
 
 const reducer = (state, action) => {
@@ -29,11 +24,11 @@ const reducer = (state, action) => {
         user: null,
       };
 
-    case actionTypes.SET_TODO:
-        return {
-            ...state,
-            todoList : action.todoList
-        }
+    case actionTypes.SET_TASK:
+      return {
+        ...state,
+        taskList: action.taskList,
+      };
     default:
       return state;
   }

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Login from "./Routes/Login/Login";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./Routes/Home/Home";
 import Dashboard from "./Routes/Home/Components/Dashboard";
-import AddTodo from "./Routes/Home/Components/AddTodo";
-import { useStateValue } from "./Contexts/UserProvider";
+import AddTask from "./Routes/Home/Components/AddTask";
+import { useStateValue } from "./Contexts/StateProvider";
 import Analytics from "./Routes/Home/Components/Analytics";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       ) : (
         <Route path="/" element={<Home />}>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/add" element={<AddTodo />} />
+          <Route path="/add" element={<AddTask />} />
           <Route path="/analytics" element={<Analytics />} />
         </Route>
       )}
