@@ -5,8 +5,8 @@ export const initialState = {
   todoList: [
     { id: 1, name: "Walk", description: "Go for a walk", branch: "todo" },
     { id: 2, name: "Dance", description: "Dance in the Hall", branch: "todo" },
-    { id: 3, name: "Sleep", description: " ", branch: "todo" },
-    { id: 4, name: "Sleep", description: " ", branch: "progress" },
+    { id: 3, name: "Sleep", description: "", branch: "todo" },
+    { id: 4, name: "Sleep", description: "", branch: "progress" },
   ],
 };
 

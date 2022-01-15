@@ -2,10 +2,40 @@ import React from "react";
 import "./SideNav.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import PieChartIcon from "@mui/icons-material/PieChart";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import { useStateValue } from "../../../Contexts/UserProvider";
+import { actionTypes } from "../../../Contexts/UserReducer";
+import { removeLocalStorage } from "../../../utils/helper";
 
 const SideNav = () => {
+  const [{},dispatch] = useStateValue();
+
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleLogout = () => {
+    dispatch({ type: actionTypes.REMOVE_USER });
+    removeLocalStorage();
+  };
 
   const isDashboard = location.pathname === "/";
 
@@ -13,7 +43,20 @@ const SideNav = () => {
     <div className="sideNav">
       <ul className="sideNavList">
         <div className="userProfile">
-          <div className="userPicture"></div>
+          <div className="userPicture" onClick={handleClickOpen}></div>
+          <Dialog
+            open={open}
+            keepMounted
+            onClose={handleClose}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>{"Do you want to Logout ?"}</DialogTitle>
+            <DialogActions>
+              <Button onClick={handleClose}>No</Button>
+              <Button onClick={handleLogout}>Yes</Button>
+            </DialogActions>
+          </Dialog>
+
           <div className="userDetails">
             <ul className="userDetailsItems">
               <li className="username">Jonas Khanwald</li>

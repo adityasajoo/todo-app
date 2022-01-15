@@ -12,7 +12,7 @@ const AddTodo = () => {
   const navigate = useNavigate();
   const [branch, setBranch] = useState({
     todo: true,
-    inProgress: false,
+    progress: false,
     done: false,
   });
   const [taskName, setTaskName] = useState("");
@@ -23,7 +23,7 @@ const AddTodo = () => {
   const [{ todoList }, dispatch] = useStateValue();
 
   const handleBranchChange = (selected) => {
-    const b = { todo: false, inProgress: false, done: false };
+    const b = { todo: false, progress: false, done: false };
     b[selected] = true;
     setBranch(b);
     setCurrentBranch(selected);
@@ -39,6 +39,7 @@ const AddTodo = () => {
       description: description,
       branch: currentBranch,
     };
+    console.log("TODO : ",todo)
     dispatch({ type: actionTypes.SET_TODO, todoList: [...todoList, todo] });
     setTaskName("");
     setDescription("");
@@ -89,8 +90,8 @@ const AddTodo = () => {
               To-Do
             </button>
             <button
-              className={`todo-btn ${branch.inProgress ? "selected" : ""}`}
-              onClick={() => handleBranchChange("inProgress")}
+              className={`todo-btn ${branch.progress ? "selected" : ""}`}
+              onClick={() => handleBranchChange("progress")}
             >
               In-Progress
             </button>
