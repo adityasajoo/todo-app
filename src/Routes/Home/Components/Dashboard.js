@@ -7,15 +7,13 @@ import EmptyTask from "./EmptyTask";
 import { Alert, Snackbar } from "@mui/material";
 import { isNewUser } from "../../../Utils/LocalStorageHelper";
 
-
 const Dashboard = () => {
   const [{ taskList }] = useStateValue();
-
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     taskList.length === 1 && isNewUser() && setOpen(true);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
