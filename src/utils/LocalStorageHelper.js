@@ -47,3 +47,15 @@ export const removeTasksLocalStorage = () => {
 };
 
 
+/*
+  Check if user is logging in for the first time. If yes, show him drag and drop info.
+*/
+export const isNewUser = () =>{
+  const visitedStr = localStorage.getItem("visited")
+  const visited = JSON.parse(visitedStr);
+  if(!visited){
+    localStorage.setItem("visited","true");
+    return true;
+  }
+  return false;
+}

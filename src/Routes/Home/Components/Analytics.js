@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import SecondaryNav from "./SecondaryNav";
 import { PieChart } from "react-minimal-pie-chart";
 import { useStateValue } from "../../../Contexts/StateProvider";
-import { BRANCHES } from "../../../utils/Constants";
+import { BRANCHES, branchHeader, COLORS } from "../../../utils/Constants";
 import EmptyTask from "./EmptyTask";
 
 const Analytics = () => {
   const [{ taskList }] = useStateValue();
-  const [values, setValues] = useState({ todo: 0, progress: 0, done: 0 });
+  const [data, setData] = useState([]);
 
   //Control Explode of the PI Chart
   const shiftSize = 3;
@@ -18,7 +18,13 @@ const Analytics = () => {
     taskList.forEach((todo) => {
       tempValues[todo.branch] += 1;
     });
-    setValues(tempValues);
+    const tempData = [];
+    for (const [key, value] of Object.entries(tempValues)) {
+      if (value !== 0) {
+        tempData.push({ title: branchHeader[key], value, color: COLORS[key] });
+      }
+    }
+    setData(tempData);
   }, [taskList]);
 
   return (
@@ -32,44 +38,24 @@ const Analytics = () => {
           <PieChart
             animate
             animationDuration={500}
+            label={({ dataEntry }) => dataEntry.value}
+            labelStyle={{ fontSize: "5px" }}
             animationEasing="ease-out"
             className="piechart"
             startAngle={300}
             radius={PieChart.defaultProps.radius - shiftSize}
             segmentsShift={(index) => (index === 0 ? shiftSize : 0.5)}
-            data={[
-              { title: "To-Do", value: values[BRANCHES[0]], color: "#27AE60" },
-              {
-                title: "In Progress",
-                value: values[BRANCHES[1]],
-                color: "#F2C94C",
-              },
-              { title: "Done", value: values[BRANCHES[2]], color: "#2F80ED" },
-            ]}
+            data={data}
           />
 
           <div className="chartLabels">
-            <div className="chartLabel">
-              <div
-                className="color"
-                style={{ backgroundColor: "#27AE60" }}
-              ></div>
-              <p>To-Do</p>
-            </div>
-            <div className="chartLabel">
-              <div
-                className="color"
-                style={{ backgroundColor: "#F2C94C" }}
-              ></div>
-              <p>In-Progress</p>
-            </div>
-            <div className="chartLabel">
-              <div
-                className="color"
-                style={{ backgroundColor: "#2F80ED" }}
-              ></div>
-              <p>Done</p>
-            </div>
+            {BRANCHES.forEach((branch) => {
+              const style = { backgroundColor: COLORS[branch] };
+              <div className="chartLabel">
+                <div className="color" style={style}></div>
+                <p>{branchHeader[branch]}</p>
+              </div>;
+            })}
           </div>
         </div>
       )}

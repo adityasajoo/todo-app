@@ -13,3 +13,9 @@ export const branchHeader = {
   progress: "In-Progress",
   done: "Done",
 };
+
+export const COLORS = {
+  todo: "#F2C94C",
+  progress: "#27AE60",
+  done: "#2F80ED",
+};

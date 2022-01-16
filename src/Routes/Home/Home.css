@@ -130,7 +130,8 @@
   justify-content: space-between;
 }
 
-.MuiSvgIcon-root.MuiSvgIcon-fontSizeSmall.css-vcmp52-MuiSvgIcon-root:hover {
+.MuiSvgIcon-root.MuiSvgIcon-fontSizeSmall.css-vcmp52-MuiSvgIcon-root:hover,
+.MuiSvgIcon-root.MuiSvgIcon-fontSizeSmall.css-14npde0-MuiSvgIcon-root:hover {
   color: #343535;
   cursor: pointer;
 }
@@ -150,10 +151,9 @@
   cursor: pointer;
 }
 
-
 @media screen and (max-width: 600px) {
-  .card{
-    width:250px;
+  .card {
+    width: 250px;
   }
 }
 
@@ -217,7 +217,7 @@ li.sideNavListItem {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-image: url("../../assets/profile.jpg");
+  /* background-image: url("../../assets/profile.jpg"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -320,6 +320,7 @@ li.sideNavListItem {
 .todo-form {
   margin: 60px;
   width: 300px;
+  margin-top:0px;
 }
 
 .todo-input,
@@ -469,13 +470,24 @@ li.sideNavListItem {
 /* ========================================================================== */
 /* EmptyTask styles */
 /* =========================================================================== */
-.empty-task-container{
+.empty-task-container {
   width: 100%;
   margin: 10px;
-  
 }
 
-.empty-task-container h3{
+.empty-task-container h3 {
   font-size: 25px;
 }
 
+/* ========================================================================== */
+/* Edit Task styles */
+/* =========================================================================== */
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  width: 100%;
+}
+
+.MuiDialogContent-root.css-ypiqx9-MuiDialogContent-root {
+  padding: 0;
+  width: 100%;
+}

@@ -8,7 +8,7 @@ import { removeLocalStorage } from "../../../utils/LocalStorageHelper";
 
 const SideNav = () => {
   // eslint-disable-next-line no-empty-pattern
-  const [{}, dispatch] = useStateValue();
+  const [{user}, dispatch] = useStateValue();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,7 +29,9 @@ const SideNav = () => {
     <div className="sideNav">
       <ul className="sideNavList">
         <div className="userProfile">
-          <div className="userPicture" onClick={() => setOpen(true)}></div>
+          <div onClick={() => setOpen(true)}>
+            <img className="userPicture"  src={user.avatar} alt="Error"/>
+          </div>
           <Dialog
             open={open}
             keepMounted
@@ -45,8 +47,8 @@ const SideNav = () => {
 
           <div className="userDetails">
             <ul className="userDetailsItems">
-              <li className="username">Jonas Khanwald</li>
-              <li className="email">jonas@todo.com</li>
+              <li className="username">{user.name}</li>
+              <li className="email">{user.email}</li>
             </ul>
           </div>
         </div>

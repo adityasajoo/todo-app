@@ -7,16 +7,26 @@ import { actionTypes } from "../../../Contexts/StateReducer";
 import { useNavigate } from "react-router-dom";
 import { setTasksLocalStorage } from "../../../utils/LocalStorageHelper";
 
-const AddTask = () => {
+const AddTask = ({ isEdit, handleClose, task }) => {
   const navigate = useNavigate();
-  const [branch, setBranch] = useState({
-    todo: true,
-    progress: false,
-    done: false,
-  });
-  const [taskName, setTaskName] = useState("");
-  const [description, setDescription] = useState("");
-  const [currentBranch, setCurrentBranch] = useState("todo");
+  const [branch, setBranch] = useState(
+    !isEdit
+      ? {
+          todo: true,
+          progress: false,
+          done: false,
+        }
+      : {
+          todo: task && task.branch === "todo",
+          progress: task && task.branch === "progress",
+          done: task && task.branch === "done",
+        }
+  );
+  const [taskName, setTaskName] = useState(task ? task.name : "");
+  const [description, setDescription] = useState(task ? task.description : "");
+  const [currentBranch, setCurrentBranch] = useState(
+    task ? task.branch : "todo"
+  );
   const [error, setError] = useState(null);
 
   const [{ taskList }, dispatch] = useStateValue();
@@ -29,30 +39,50 @@ const AddTask = () => {
     setCurrentBranch(selected); //Set current branch to make saving easy
   };
 
-  //Create New Task
-  const handleCreate = () => {
+  /*Create New Task 
+    Creates new task if not found, else edits the existing task 
+  */
+  const handleCreate = (id) => {
     if (!taskName) {
       return setError("Task Name is required");
     }
-    const task = {
-      id: uuid(),
-      name: taskName,
-      description: description,
-      branch: currentBranch,
-    };
 
-    dispatch({ type: actionTypes.SET_TASK, taskList: [...taskList, task] });
-    setTasksLocalStorage([...taskList, task]);
+    let newTask = taskList.find((task) => task.id === id);
+
+    if (newTask) {
+      let tempTaskist = taskList.filter((task) => task.id !== id);
+      newTask.name = taskName;
+      newTask.description = description;
+      newTask.branch = currentBranch;
+      dispatch({
+        type: actionTypes.SET_TASK,
+        taskList: [...tempTaskist, newTask],
+      });
+      setTasksLocalStorage([...tempTaskist, newTask]);
+    } else {
+      newTask = {
+        id: uuid(),
+        name: taskName,
+        description: description,
+        branch: currentBranch,
+      };
+      dispatch({
+        type: actionTypes.SET_TASK,
+        taskList: [...taskList, newTask],
+      });
+      setTasksLocalStorage([...taskList, newTask]);
+    }
+
     setTaskName("");
     setDescription("");
     setCurrentBranch("todo");
     setBranch({ todo: true, progress: false, done: false });
-    navigate("/");
+    isEdit ? handleClose() : navigate("/");
   };
 
   return (
     <>
-      <SecondaryNav title="Create Task" />
+      {!isEdit && <SecondaryNav title="Create Task" />}{" "}
       <div className="todo-form">
         <div>
           {error && (
@@ -107,13 +137,23 @@ const AddTask = () => {
             </button>
           </div>
         </div>
+
         <div className="btns">
           <button className="cancel-btn" onClick={() => navigate("/")}>
             Cancel
           </button>
-          <button className="create-btn" onClick={handleCreate}>
-            Create
-          </button>
+          {!isEdit ? (
+            <button className="create-btn" onClick={handleCreate}>
+              Create
+            </button>
+          ) : (
+            <button
+              className="create-btn"
+              onClick={() => handleCreate(task.id)}
+            >
+              Edit
+            </button>
+          )}
         </div>
       </div>
     </>
@@ -121,3 +161,7 @@ const AddTask = () => {
 };
 
 export default AddTask;
+
+AddTask.defaultProps = {
+  isEdit: false,
+};
