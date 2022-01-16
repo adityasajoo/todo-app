@@ -2,8 +2,8 @@ import React from "react";
 import Task from "./Task";
 import { useStateValue } from "../../../Contexts/StateProvider";
 import { actionTypes } from "../../../Contexts/StateReducer";
-import { branchClassNames, branchHeader } from "../../../utils/Constants";
-import {setTasksLocalStorage} from '../../../utils/LocalStorageHelper'
+import { branchClassNames, branchHeader } from "../../../Utils/Constants";
+import {setTasksLocalStorage} from '../../../Utils/LocalStorageHelper'
 
 const TaskList = ({ branch }) => {
   const [{ taskList }, dispatch] = useStateValue();

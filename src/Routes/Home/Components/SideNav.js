@@ -4,7 +4,7 @@ import PieChartIcon from "@mui/icons-material/PieChart";
 import { Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
 import { useStateValue } from "../../../Contexts/StateProvider";
 import { actionTypes } from "../../../Contexts/StateReducer";
-import { removeLocalStorage } from "../../../utils/LocalStorageHelper";
+import { removeLocalStorage } from "../../../Utils/LocalStorageHelper";
 
 const SideNav = () => {
   // eslint-disable-next-line no-empty-pattern

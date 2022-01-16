@@ -1,4 +1,4 @@
-import { getLocalStorage,getTasksLocalStorage } from "../utils/LocalStorageHelper";
+import { getLocalStorage,getTasksLocalStorage } from "../Utils/LocalStorageHelper";
 
 export const initialState = {
   user: getLocalStorage(),

@@ -3,7 +3,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Tooltip, useMediaQuery } from "@mui/material";
-import { len, BRANCHES } from "../../../utils/Constants";
+import { len, BRANCHES } from "../../../Utils/Constants";
 import React, { useState } from "react";
 import EditTask from "./EditTask";
 

@@ -8,9 +8,9 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useStateValue } from "../../Contexts/StateProvider";
 import { actionTypes } from "../../Contexts/StateReducer";
 import axios from "axios";
-import { setLocalStorage } from "../../utils/LocalStorageHelper";
+import { setLocalStorage } from "../../Utils/LocalStorageHelper";
 import ClipLoader from "react-spinners/ClipLoader";
-import background from '../../assets/background.svg'
+import background from '../../Assets/background.svg'
 
 const Login = () => {
   // eslint-disable-next-line no-empty-pattern

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Nav from "./Nav";
 import TaskList from "./TaskList";
-import { BRANCHES } from "../../../utils/Constants";
+import { BRANCHES } from "../../../Utils/Constants";
 import { useStateValue } from "../../../Contexts/StateProvider";
 import EmptyTask from "./EmptyTask";
 import { Alert, Snackbar } from "@mui/material";
-import { isNewUser } from "../../../utils/LocalStorageHelper";
+import { isNewUser } from "../../../Utils/LocalStorageHelper";
 
 
 const Dashboard = () => {
@@ -15,6 +15,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     taskList.length === 1 && isNewUser() && setOpen(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

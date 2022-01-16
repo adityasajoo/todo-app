@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SecondaryNav from "./SecondaryNav";
 import { PieChart } from "react-minimal-pie-chart";
 import { useStateValue } from "../../../Contexts/StateProvider";
-import { BRANCHES, branchHeader, COLORS } from "../../../utils/Constants";
+import { BRANCHES, branchHeader, COLORS } from "../../../Utils/Constants";
 import EmptyTask from "./EmptyTask";
 
 const Analytics = () => {
@@ -49,12 +49,14 @@ const Analytics = () => {
           />
 
           <div className="chartLabels">
-            {BRANCHES.forEach((branch) => {
+            {BRANCHES.map((branch) => {
               const style = { backgroundColor: COLORS[branch] };
-              <div className="chartLabel">
-                <div className="color" style={style}></div>
-                <p>{branchHeader[branch]}</p>
-              </div>;
+              return (
+                <div className="chartLabel">
+                  <div className="color" style={style}></div>
+                  <p>{branchHeader[branch]}</p>
+                </div>
+              );
             })}
           </div>
         </div>

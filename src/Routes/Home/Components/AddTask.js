@@ -5,7 +5,7 @@ import { useStateValue } from "../../../Contexts/StateProvider";
 import { v4 as uuid } from "uuid";
 import { actionTypes } from "../../../Contexts/StateReducer";
 import { useNavigate } from "react-router-dom";
-import { setTasksLocalStorage } from "../../../utils/LocalStorageHelper";
+import { setTasksLocalStorage } from "../../../Utils/LocalStorageHelper";
 
 const AddTask = ({ isEdit, handleClose, task }) => {
   const navigate = useNavigate();
