@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import Alert from "@mui/material/Alert";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";

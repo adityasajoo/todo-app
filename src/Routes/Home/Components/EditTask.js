@@ -1,15 +1,9 @@
 import {
-  Box,
-  Button,
   Dialog,
-  DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
-  Modal,
-  Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import AddTask from "./AddTask";
 
 const EditTask = ({ open, handleClose, task }) => {
@@ -27,12 +21,6 @@ const EditTask = ({ open, handleClose, task }) => {
         <DialogContent>
             <AddTask isEdit handleClose={handleClose} task={task}/>
         </DialogContent>
-        {/* <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button>
-        </DialogActions> */}
       </Dialog>
     </>
   );
