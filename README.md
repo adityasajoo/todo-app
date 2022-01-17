@@ -2,14 +2,12 @@
 
 #### A react application which can be used to create tasks and manage reminders for the tasks.<br/>
 
-#### The application has three sections : "Todo", "In-Progress" and "Done". User can drag and drop tasks from one section to another.
+#### This application has three sections : "Todo", "In-Progress" and "Done". User can drag and drop tasks from one section to another.
 
 <hr>
-<br/>
 
-## Demo of the application can be found here: [https://todo-app-switchon.netlify.app/](https://todo-app-switchon.netlify.app/)
+### Demo of the application can be found here: [https://todo-app-switchon.netlify.app/](https://todo-app-switchon.netlify.app/)
 
-<br/>
 
 <hr>
 
